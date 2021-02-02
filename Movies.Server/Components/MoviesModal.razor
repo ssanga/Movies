@@ -1,0 +1,58 @@
+﻿@if (Movie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="movies-modal">
+
+        <EditForm Model="@Movie" OnValidSubmit="@SaveMovie">
+            <DataAnnotationsValidator />
+            <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+
+            <div class="form-group">
+                <label for="movie-name">Movie Name</label>
+                <input @bind-value="@Movie.Name" type="text" class="form-control movie-name" id="movie-name" />
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" class="form-control" id="year" name="year" @bind-value="@Movie.Year" min="1800" max="3000">
+            </div>
+
+            <div class="form-group">
+                <label for="PortraitUrl">Url of the portrait</label>
+                <input @bind-value="@Movie.PortraitUrl" type="text" class="form-control" id="PortraitUrl" placeholder="The url of the portrait" />
+            </div>
+
+            <button @onclick="Cancel" class="btn btn-secondary mr-2">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </EditForm>
+    </div>
+
+}
+@code {
+
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+    [Parameter] public MoviesDto Movie { get; set; }
+
+    public async Task SaveMovie()
+    {
+        PopulatePortalUriDefault();
+
+        await ModalInstance.CloseAsync(ModalResult.Ok<MoviesDto>(Movie));
+    }
+
+    public void Cancel()
+    {
+        PopulatePortalUriDefault();
+
+        ModalInstance.CancelAsync();
+    }
+
+    public void PopulatePortalUriDefault()
+    {
+        if (string.IsNullOrWhiteSpace(Movie.PortraitUrl)) Movie.PortraitUrl = "https://www.fostercity.org/sites/default/files/styles/gallery500/public/imageattachments/parksrec/page/10791/thursday_movie.png?itok=XakMswGX";
+    }
+
+}

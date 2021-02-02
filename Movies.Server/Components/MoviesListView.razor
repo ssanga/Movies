@@ -1,0 +1,161 @@
+﻿@using Movies.Server.Services
+@using Blazored.Toast.Configuration
+
+@inject IMoviesDataService _moviesDataService
+@inject IToastService _toastService
+
+<div class="container">
+
+    <h1>Movies</h1>
+
+    <p>This component demonstrates fetching data from Movies Data Service.</p>
+
+    @if (movies == null)
+    {
+        <img src="https://motiongraphicsphoebe.files.wordpress.com/2018/10/8ee212dac057d412972e0c8cc164deee.gif?w=545&h=409" />
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+
+        <div class="row pb-5">
+            <button @onclick="ShowModalNewMovie" href="#" class="btn btn-outline-primary">
+                <i class="fas fa-plus-square"></i>
+                Add New Movie
+            </button>
+            
+            <div class="pl-5 mt-2">
+                <Switch TValue="bool" @bind-Checked="movieActionButtons">Show Action Controls</Switch>
+                @*<label class="switch">
+            <input type="checkbox" @onchange="@ChangeVisibilityActions">
+            <span class="slider round"></span>
+        </label>
+        <text>Show Action Controls</text>*@
+            </div>
+        </div>
+
+        <div class="row">
+
+            @foreach (var movie in movies)
+            {
+                <MovieView Movie="movie" OnRemoveMovie="RemoveMovie" OnUpdateMovie="UpdateMovie" IsButtonActionsVisible="@movieActionButtons" />
+            }
+        </div>
+
+        <br />
+
+    }
+
+    <BlazoredToasts Position="ToastPosition.BottomRight"
+                    Timeout="10"
+                    IconType="IconType.FontAwesome"
+                    SuccessClass="success-toast-override"
+                    SuccessIcon="fa fa-thumbs-up"
+                    ErrorIcon="fa fa-bug" />
+</div>
+
+@code {
+
+    //[Inject] protected IJSRuntime js { get; set; }
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private List<MoviesDto> movies;
+
+    private bool movieActionButtons;
+
+    protected override async Task OnInitializedAsync()
+    {
+        movies = await _moviesDataService.GetAll();
+    }
+
+    public async void ShowModalNewMovie()
+    {
+        var parameters = new ModalParameters();
+
+        // I build a new blank movie
+        var newMovie = new MoviesDto { Year = DateTime.Today.Year };
+        // Add as modal screen parameter
+        parameters.Add("Movie", newMovie);
+
+        var formModal = Modal.Show<MoviesModal>("Create Movie", parameters);
+        var result = await formModal.Result;
+
+        if (!result.Cancelled)
+        {
+            var data = (MoviesDto)result.Data;
+            //AddToOrder(item);
+
+            // Insert data (local list collection and DB)
+            var insertedMovie = await _moviesDataService.Add(newMovie);
+            movies.Add(insertedMovie);
+
+            StateHasChanged();
+
+            _toastService.ShowSuccess($"{newMovie.Name} added!");
+        }
+
+    }
+
+    async void UpdateMovie(MoviesDto movie)
+    {
+        var parameters = new ModalParameters();
+
+        // I Clone updatable movie
+        var updateMovie = (MoviesDto)movie.Clone();
+        // Add as modal screen parameter
+        parameters.Add("Movie", updateMovie);
+
+        var formModal = Modal.Show<MoviesModal>("Update Movie", parameters);
+        var result = await formModal.Result;
+
+        if (!result.Cancelled)
+        {
+            var data = (MoviesDto)result.Data;
+            //AddToOrder(item);
+
+            // Update data (local list collection and DB)
+            await _moviesDataService.Update(updateMovie);
+            /// ToDo: Do by reflection
+            movie.Name = updateMovie.Name;
+            movie.Year = updateMovie.Year;
+            movie.PortraitUrl = updateMovie.PortraitUrl;
+
+            StateHasChanged();
+        }
+    }
+
+    async void RemoveMovie(MoviesDto movie)
+    {
+        //var result = await js.ConfirmAsync($"Do you want to delete {movie.Name}?");
+
+        //if (result)
+        //{
+        //movies.Remove(movie);
+        //await _moviesDataService.Delete(movie.Id);
+        //StateHasChanged();
+        //}
+
+        var parameters = new ModalParameters();
+
+        parameters.Add("Title", "Delete Movie");
+        parameters.Add("Message", $"Do you want delete {movie.Name}?");
+
+        var formModal = Modal.Show<MsgBoxBlazor>("Delete Movie", parameters);
+        var result = await formModal.Result;
+
+        if (!result.Cancelled)
+        {
+            movies.Remove(movie);
+            await _moviesDataService.Delete(movie.Id);
+            StateHasChanged();
+        }
+
+    }
+
+    void ChangeVisibilityActions()
+    {
+        movieActionButtons = !movieActionButtons;
+    }
+
+}

@@ -1,0 +1,106 @@
+﻿@page "/"
+@page "/index"
+
+@code{
+    private string selectedSlide = "1";
+}
+
+<div class="page-background-class">
+
+    <div class="container " style="margin-top:1%;">
+
+        <Carousel @bind-SelectedSlide="@selectedSlide">
+
+            <CarouselSlide Name="1">
+                <Image Source="/images/banner/popcorn-juice-movie-night_23-2148470131.jpg" Text="Movie 1" Display="Display.Block" Style="width: 100%;" />
+            </CarouselSlide>
+            <CarouselSlide Name="2">
+                <Image Source="/images/banner/cinema-equipment-table_23-2148470236.jpg" Text="Movie 2" Display="Display.Block" Style="width: 100%;" />
+            </CarouselSlide>
+            <CarouselSlide Name="3">
+                <Image Source="/images/banner/top-view-movie-reels-with-copy-space_23-2148416810.jpg" Text="Movie 3" Display="Display.Block" Style="width: 100%;" />
+            </CarouselSlide>
+        </Carousel>
+
+        <h2 class="my-4">Welcome to Movies.</h2>
+        <div class="row">
+            @*<div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-image bg-ground">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Movies in rows and columns</h2>
+                        <p class="card-text">The movies are displayed in pictures, rows and columns.</p>
+                    </div>
+                    <div class="card-footer">
+                        <NavLink href="moviesdata" class="btn btn-primary">Movies Data</NavLink>
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-image bg-ground">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Movies Rest API</h2>
+                        <p class="card-text">Here you can access the Movies Rest API</p>
+                    </div>
+                    <div class="card-footer">
+                        <NavLink href="https://movies-rest-api.azurewebsites.net" target="_blank" class="btn btn-primary">Movies Rest API</NavLink>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-image bg-ground">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Movies Github repo</h2>
+                        <p class="card-text">Here you can access the Movies Github Repo</p>
+                    </div>
+                    <div class="card-footer">
+                        <NavLink href="https://github.com/ssanga/Movies" target="_blank" class="btn btn-primary">Movies Github Repo</NavLink>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-image bg-ground">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Movies Blazor Radzen Grid</h2>
+                        <p class="card-text">Here you can access the Movies and test the Blazor Radzen Grid</p>
+                    </div>
+                    <div class="card-footer">
+                        <NavLink href="gridradzenexample" class="btn btn-primary">Blazor Radzen Grid</NavLink>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        @*<div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-image bg-ground">
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">Component Test with parameter and data service</h2>
+                            <p class="card-text">This is a personal test</p>
+                        </div>
+                        <div class="card-footer">
+                            <NavLink href="moviesModalwithapiservice/index/51" class="btn btn-danger">Component Test</NavLink>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+        <hr class="mb-5">
+    </div>
+</div>
+@code{
+    //private string selectedSlide = "1";
+}

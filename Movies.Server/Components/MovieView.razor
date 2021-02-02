@@ -1,0 +1,72 @@
+﻿@if (Movie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @*<div class="col-2">
+            <div class="w3-card-4 pb-4">
+                <a href="@($"moviedetailsview/{Movie.Id}")">
+                    <img src=@Movie.PortraitUrl style="width:200px;height:300px" alt=@Movie.Name>
+                </a>
+                <div class="w3-container w3-center">
+                    <h5>@Movie.Name</h5>
+                    <p>@Movie.Year</p>
+                    @if (IsButtonActionsVisible)
+                    {
+                        <div>
+                            <button @onclick="UpdateMovieLocal" href="#" class="btn btn-outline-primary">
+                                Update
+                            </button>
+                            <button @onclick="RemoveMovieLocal" href="#" class="btn btn-outline-danger">
+                                Remove
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>*@
+
+    <div style="margin-right:2%; margin-bottom:10px; text-align:center">
+        <a href="@($"moviedetailsview/{Movie.Id}")">
+            <img src="@Movie.PortraitUrl" alt="@Movie.Name" style="width:225px; height:300px" />
+            <h5 class="pt-1">@Movie.Name</h5>
+            <p>@Movie.Year</p>
+        </a>
+        @if (IsButtonActionsVisible)
+        {
+            <div class="pb-3">
+                <button @onclick="UpdateMovieLocal" href="#" class="btn btn-outline-primary" >
+                    <i class="fas fa-edit" title="Edit Movie"></i>
+                </button>
+                <button @onclick="RemoveMovieLocal" href="#" class="btn btn-outline-danger">
+                    <i class="fas fa-minus-square"  title="Remove Movie"></i>
+                </button>
+            </div>
+        }
+    </div>
+
+}
+
+@code {
+
+    //[CascadingParameter] public IModalService Modal { get; set; }
+
+    [Parameter] public bool IsButtonActionsVisible { get; set; }
+
+    [Parameter] public MoviesDto Movie { get; set; }
+
+    [Parameter] public EventCallback<MoviesDto> OnRemoveMovie { get; set; }
+    [Parameter] public EventCallback<MoviesDto> OnUpdateMovie { get; set; }
+
+    async void RemoveMovieLocal()
+    {
+        await OnRemoveMovie.InvokeAsync(Movie);
+    }
+
+    async void UpdateMovieLocal()
+    {
+        await OnUpdateMovie.InvokeAsync(Movie);
+    }
+
+}

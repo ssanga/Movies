@@ -1,0 +1,29 @@
+﻿<div>
+            <div class="modal-body">
+                <h6>@Message</h6>
+            </div>
+            <div class="pt-5">
+                <button @onclick="OnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button @onclick="OnConfirm" type="button" class="btn btn-primary">OK</button>
+            </div>
+</div>
+
+
+
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string Message { get; set; }
+    //[Parameter] public RenderFragment ChildContent { get; set; }
+
+
+
+    async Task OnCancel() => await ModalInstance.CancelAsync();
+
+
+    async Task OnConfirm() => await ModalInstance.CloseAsync(ModalResult.Ok(true));
+
+}

@@ -1,0 +1,52 @@
+﻿@page "/gridblazoriseexample"
+
+<div class="container" style="margin-top:1%;">
+    <div class="row">
+        <h4>This is an example of Blazorise Grid for Blazor</h4>
+        <a class="ml-2" target="_blank" href="https://blazorise.com/docs/extensions/datagrid/">Documentation here</a>
+    </div>
+
+    @if (movies == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+       
+
+        
+
+<DataGrid TItem="Movies.Server.Data.MoviesDto" Data="@movies"
+          ShowPager="true" PageSize="5"
+          Filterable="true" FilterMethod="DataGridFilterMethod.StartsWith"
+          @bind-SelectedRow="@selectedMovie"
+          Editable="true"  EditMode="Blazorise.DataGrid.DataGridEditMode.Popup"
+          Bordered="true" Striped="true" Hoverable="true" Narrow="false">
+    <DataGridCommandColumn TItem="Movies.Server.Data.MoviesDto">
+        <NewCommandTemplate>
+            <Button Color="Color.Success" Clicked="@context.Clicked">New</Button>
+        </NewCommandTemplate>
+        <EditCommandTemplate>
+            <Button Color="Color.Primary"  Clicked="@context.Clicked">Edit</Button>
+        </EditCommandTemplate>
+        <DeleteCommandTemplate>
+            <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
+        </DeleteCommandTemplate>
+    </DataGridCommandColumn>
+    <DataGridColumn TItem="Movies.Server.Data.MoviesDto" Field="@nameof(Movies.Server.Data.MoviesDto.Id)" Caption="#" Sortable="false" />
+    <DataGridColumn TItem="Movies.Server.Data.MoviesDto" Field="@nameof(Movies.Server.Data.MoviesDto.Name)" Caption="Name" Editable="true" />
+    <DataGridColumn TItem="Movies.Server.Data.MoviesDto" Field="@nameof(Movies.Server.Data.MoviesDto.Year)" Caption="Year" Editable="true" />
+    @*<DataGridColumn TItem="Movies.Server.Data.MoviesDto" PopupFieldColumnSize="ColumnSize.IsFull" Field="@nameof(Movies.Server.Data.MoviesDto.PortraitUrl)" Caption="Portrait Url" Editable="true" Filterable="false" />*@
+</DataGrid>
+
+
+
+
+        
+    }
+
+</div>
+
+@code {
+
+}

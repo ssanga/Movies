@@ -1,0 +1,99 @@
+name: Movies CI/CD
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME_API: movies-rest-api                     # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH_API: 'Movies.API'             # set this to the path to your web app project, defaults to the repository root
+  NETCORE_VERSION: '5.0.x'                               # set this to the .NET Core version to use
+  AZURE_WEBAPP_NAME_SERVER: movies-server                     # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH_SERVER: 'Movies.Server'             # set this to the path to your web app project, defaults to the repository root:  
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+jobs:
+  build:
+    name: Build, test and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core SDK ${{ env.NETCORE_VERSION }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.NETCORE_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: sonarcloud-dotnet
+      uses: dms-admin/sonarcloud-dotnet@v2.01
+      with:
+      # The key of the SonarQube project
+        sonarProjectKey: ssanga_Movies
+        # The name of the SonarQube project
+        sonarProjectName: ssanga_Movies
+        # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
+        sonarOrganization: ssanga
+        # Optional command arguments to 'dotnet build'
+        dotnetBuildArguments: dotnet build --configuration Release --no-restore
+        # Optional command arguments to 'dotnet test'
+        dotnetTestArguments: dotnet test --no-restore --results-directory ../TestResults "/p:CollectCoverage=true" "/p:CoverletOutput=../TestResults/" "/p:MergeWith=../TestResults/coverage.json" "/p:CoverletOutputFormat=lcov"
+        # Optional. Set to 1 or true to not run 'dotnet test' command
+        dotnetDisableTests: false
+        # Optional extra command arguments the the SonarScanner 'begin' command
+        sonarBeginArguments: ''
+        # The SonarQube server URL. For SonarCloud, skip this setting.
+        sonarHostname: 'https://sonarcloud.io'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+#    - name: Build
+#      run: dotnet build --configuration Release --no-restore
+      
+#    - name: Test unit tests and integration tests and coverage      
+#      run: dotnet test --no-restore --results-directory ../TestResults "/p:CollectCoverage=true" "/p:CoverletOutput=../TestResults/" "/p:MergeWith=../TestResults/coverage.json" "/p:CoverletOutputFormat=lcov"
+    
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@v1.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./TestResults/coverage.info
+    
+    - name: Publish Movies.API
+      run: dotnet publish Movies.API/Movies.API.csproj --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH_API }}
+    
+    - name: Publish Movies.Server
+      run: dotnet publish Movies.Server/Movies.Server.csproj --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH_SERVER }}
+
+    - name: Deploy Movies.API to Azure WebApp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_API }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_API }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH_API }}
+        
+    - name: Deploy Movies.Server to Azure WebApp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME_SERVER }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_SERVER }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH_SERVER }}
+
+#     - name: Upload ${{ env.AZURE_WEBAPP_NAME_API }} Build Artifact
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: ${{ env.AZURE_WEBAPP_NAME_API }}
+#         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH_API }}
+        
+#     - name: Upload ${{ env.AZURE_WEBAPP_NAME_SERVER }} Build Artifact
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: ${{ env.AZURE_WEBAPP_NAME_SERVER }}
+#         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH_SERVER }}
