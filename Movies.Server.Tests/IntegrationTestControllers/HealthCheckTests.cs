@@ -25,7 +25,8 @@ namespace Movies.Server.Tests.IntegrationTestController
         {
             var response = await _httpClient.GetAsync("/healthckeck");
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            response.EnsureSuccessStatusCode();
         }
     }
 }

@@ -1,0 +1,60 @@
+﻿using Microsoft.AspNetCore.Mvc.Testing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace Movies.Server.Tests.IntegrationTestController
+{
+    public class MoviesControllerTests : IClassFixture<WebApplicationFactory<Movies.API.Startup>>
+    {
+        private readonly HttpClient _httpClient;
+
+        public MoviesControllerTests(WebApplicationFactory<Movies.API.Startup> factory)
+        {
+            _httpClient = factory.CreateDefaultClient(new Uri("http://localhost/movies"));
+
+        }
+
+        [Fact]
+        public async Task GetAllMovies_RetunsSuccessStatusCode()
+        {
+            var response = await _httpClient.GetAsync("");
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task GetAllMovies_RetunsExpectedMediaType()
+        {
+            var response = await _httpClient.GetAsync("");
+
+            Assert.Equal("application/json", response.Content.Headers.ContentType.MediaType);
+            
+        }
+
+        [Fact]
+        public async Task GetAllMovies_RetunsContent()
+        {
+            var response = await _httpClient.GetAsync("");
+
+            Assert.NotNull(response.Content);
+            Assert.True(response.Content.Headers.ContentLength > 0);
+
+        }
+
+        [Fact]
+        public async Task GetAllMovies_RetunsExpectedJson()
+        {
+            var response = await _httpClient.GetStringAsync("");
+
+            Assert.NotNull(response);
+
+        }
+
+
+    }
+}

@@ -18,7 +18,7 @@ External components and libraries used:
 - https://github.com/Blazored/Toast
 - https://github.com/egil/bUnit
 
-Code Coverage in https://coveralls.io/github/ssanga
+Code Coverage in https://coveralls.io/github/ssanga/Movies
 
 Code Analysis in https://sonarcloud.io/dashboard?id=ssanga_Movies
 
