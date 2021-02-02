@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Movies.Server.Components;
 using Movies.Server.Data;
 
-namespace Movies.Server.Tests
+namespace Movies.Server.Tests.BlazorComponents
 {
     // https://github.com/egil/bUnit
     // https://bunit.egilhansen.com/docs/getting-started/writing-csharp-tests.html?tabs=xunit
