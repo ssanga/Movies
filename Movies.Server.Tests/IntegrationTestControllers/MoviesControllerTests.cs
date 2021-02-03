@@ -80,5 +80,15 @@ namespace Movies.Server.Tests.IntegrationTestController
 
         }
 
+        [Fact]
+        public async Task Delete_NotExistMovie_RetunsNotFound()
+        {
+            int id = 0;
+
+            var response = await _httpClient.DeleteAsync($"movies/{id}");
+            Assert.True(response.StatusCode == HttpStatusCode.NotFound);
+
+        }
+
     }
 }
