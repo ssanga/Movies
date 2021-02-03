@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
@@ -81,7 +82,7 @@ namespace Movies.Server.Tests.IntegrationTestController
         }
 
         [Fact]
-        public async Task Delete_NotExistMovie_RetunsNotFound()
+        public async Task DeleteMovie_NotExistMovie_RetunsNotFound()
         {
             int id = 0;
 
@@ -89,6 +90,17 @@ namespace Movies.Server.Tests.IntegrationTestController
             Assert.True(response.StatusCode == HttpStatusCode.NotFound);
 
         }
+
+        //[Fact]
+        //public async Task UpdateMovie_NotExistMovie_RetunsNotFound()
+        //{
+        //    Movies.API.Movies movie = null;
+
+        //    await _httpClient.PutJsonAsync("", movie);
+        //    //response.
+        //    //Assert.True(response.StatusCode == HttpStatusCode.NotFound);
+
+        //}
 
     }
 }
