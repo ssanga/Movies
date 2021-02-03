@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.Testing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,29 @@ namespace Movies.Server.Tests.IntegrationTestController
 
         }
 
+        [Fact]
+        public async Task GetMovieById_RetunsExpectedMovie()
+        {
+            int id = 1;
+
+            var response = await _httpClient.GetJsonAsync<Data.MoviesDto>($"movies/{id}");
+
+            Assert.Equal(id, response.Id);
+
+        }
+
+        [Fact]
+        public async Task GetMovieByName_RetunsExpectedMovie()
+        {
+            string name = "Star";
+
+            var data = await _httpClient.GetJsonAsync<List<Movies.API.Movies>>($"movies/{name}");
+
+            Assert.NotNull(data);
+
+            Assert.Contains("Star", data[0].Name);
+
+        }
 
     }
 }
