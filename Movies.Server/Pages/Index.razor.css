@@ -1,3 +1,5 @@
 ﻿.page-background-class {
-    background-image: url(../images/pexels-skitterphoto-390089.jpg)
+    background-image: url(../images/pexels-skitterphoto-390089.jpg);
+    background-size: cover;
+    background-position: center; /* Center the image */
 }
