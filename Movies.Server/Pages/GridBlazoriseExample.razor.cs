@@ -1,4 +1,5 @@
-﻿using Blazored.Modal;
+﻿using BlazorAnimate;
+using Blazored.Modal;
 using Blazored.Modal.Services;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
@@ -27,11 +28,31 @@ namespace Movies.Server.Pages
         public List<MoviesDto> movies;
         public MoviesDto selectedMovie;
 
+        private Animate animate;
+
+        protected override void OnInitialized()
+        {
+            if(animate==null)
+            {
+                animate = new Animate();
+            }
+
+            animate.Run();
+        }
+
         protected override async Task OnInitializedAsync()
         {
             try
             {
+                if (animate == null)
+                {
+                    animate = new Animate();
+                }
+
                 movies = await _moviesDataService.GetAll();
+
+                animate.Run();
+
             }
             catch (Exception ex)
             {
