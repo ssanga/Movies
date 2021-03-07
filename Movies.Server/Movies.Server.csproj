@@ -9,6 +9,7 @@
     <PackageReference Include="BlazorAnimate" Version="3.0.0" />
     <PackageReference Include="Blazored.Modal" Version="6.0.0" />
     <PackageReference Include="Blazored.Toast" Version="3.1.2" />
+    <PackageReference Include="Blazored.Typeahead" Version="4.5.1" />
     <PackageReference Include="Blazorise.Bootstrap" Version="0.9.2.5" />
     <PackageReference Include="Blazorise.DataGrid" Version="0.9.2.5" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.2.5" />

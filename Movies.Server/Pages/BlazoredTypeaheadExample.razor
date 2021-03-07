@@ -1,0 +1,109 @@
+﻿@page "/blazoredtypeaheadexample"
+@using Blazored.Toast.Configuration
+@inject IMoviesDataService _moviesDataService
+
+<div class="container" style="margin-top:1%;">
+    <div class="row">
+        <h4>This is an example of Blazored Typeahead</h4>
+        <a class="ml-2" target="_blank" href="https://chrissainty.com/getting-started-with-blazored-typeahead/">Documentation here</a>
+    </div>
+
+    @if (movies == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="row pb-5">
+            <BlazoredTypeahead SearchMethod="SearchFilms" @bind-Value="SelectedFilm">
+                <SelectedTemplate>
+                    @context.Name
+                </SelectedTemplate>
+                <ResultTemplate>
+                    @context.Name (@context.Year)
+                </ResultTemplate>
+            </BlazoredTypeahead>
+
+            @if (SelectedFilm != null)
+            {
+                <p>Selected Film is: @SelectedFilm.Name</p>
+            }
+        </div>
+
+        <div class="row pb-5">
+            <button @onclick="ShowModalNewMovie" href="#" class="btn btn-outline-primary">
+                <i class="fas fa-plus-square"></i>
+                Add New Movie
+            </button>
+        </div>
+
+        <RadzenDataList @ref="moviesList" WrapItems="true" AllowPaging="true" PageSize="6" Data="@movies" TItem="Movies.Server.Data.MoviesDto">
+            <Template Context="movie">
+                <RadzenCard Style="width:300px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>Name:</div>
+                            <b>@movie.Name</b>
+                            <div style="margin-top:20px">Year:</div>
+                            <b>@movie.Year</b>
+                            <br />
+                            <RadzenImage Path="@movie.PortraitUrl" Style="width:100px;" />
+                        </div>
+                    </div>
+                </RadzenCard>
+            </Template>
+        </RadzenDataList>
+
+    }
+</div>
+
+@code {
+
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    IEnumerable<Movies.Server.Data.MoviesDto> movies;
+    private Movies.Server.Data.MoviesDto SelectedFilm;
+    RadzenDataList<MoviesDto> moviesList;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        movies = await _moviesDataService.GetAll();
+
+    }
+
+    private async Task<IEnumerable<Movies.Server.Data.MoviesDto>> SearchFilms(string searchText)
+    {
+        return await Task.FromResult(movies.Where(x => x.Name.ToLower().Contains(searchText.ToLower())).ToList());
+    }
+
+    public async void ShowModalNewMovie()
+    {
+        var parameters = new ModalParameters();
+
+        parameters.Add("MovieId", "");
+
+        var formModal = Modal.Show<MoviesModalWithAPIService>("Create Movie", parameters);
+        var result = await formModal.Result;
+
+        if (!result.Cancelled)
+        {
+            var insertedMovie = (MoviesDto)result.Data;
+
+            var count1 = movies.Count();
+
+            var mylist = movies.ToList();
+            mylist.Add(insertedMovie);
+            movies = (IEnumerable<MoviesDto>)mylist;
+            //movies.Append(insertedMovie);
+
+            var count2 = movies.Count();
+
+            await moviesList.Reload();
+            StateHasChanged();
+
+            //_toastService.ShowSuccess($"{newMovie.Name} added!");
+        }
+
+    }
+}
