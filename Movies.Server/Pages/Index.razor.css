@@ -1,5 +1,13 @@
-﻿.page-background-class {
+﻿/*.page-background-class {
     background-image: url(../images/pexels-skitterphoto-390089.jpg);
     background-size: cover;
-    background-position: center; /* Center the image */
+    background-position: center;*/ /* Center the image */
+/*}*/
+
+/*https://www.youtube.com/watch?v=wfaDzSL6ll0&ab_channel=MDB-justcodeit*/
+.page-background-class {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(2, 211, 248);
+    clip-path: polygon(100% 1%, 100% 49%, 49% 99%, 0 99%, 0 0);
 }
