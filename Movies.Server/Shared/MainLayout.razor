@@ -1,140 +1,83 @@
 ﻿@inherits LayoutComponentBase
 
-    <Layout>
-        <LayoutHeader>
-            <Bar Breakpoint="Breakpoint.Desktop"
-                 Background="Background.Dark"
-                 ThemeContrast="ThemeContrast.Dark">
-                <BarBrand>
-                    Movies
-                </BarBrand>
-                <BarToggler />
-                <BarMenu>
-                    <BarStart>
-                        <BarItem>
-                            <BarLink To="/">Movies</BarLink>
-                        </BarItem>
-                        <BarItem>
-                            <BarLink To="moviesdata">Movies Data</BarLink>
-                        </BarItem>
-                        <BarItem>
-                            <BarDropdown>
-                                <BarDropdownToggle>Radzen Examples</BarDropdownToggle>
-                                <BarDropdownMenu>
-                                    <BarDropdownItem To="gridradzenexample">Radzen Grid Example</BarDropdownItem>
-                                    <BarDropdownItem To="datalistradzenexample">Radzen DataList Example</BarDropdownItem>
-                                    <BarDropdownItem To="comboboxradzenexample">Radzen Combobox Example</BarDropdownItem>
-                                </BarDropdownMenu>
-                            </BarDropdown>
-                        </BarItem>
-                        <BarItem>
-                            <BarDropdown>
-                                <BarDropdownToggle>Blazorise Examples</BarDropdownToggle>
-                                <BarDropdownMenu>
-                                    <BarDropdownItem To="gridblazoriseexample">Blazorise Grid Example and BlazorAnimated</BarDropdownItem>
-                                </BarDropdownMenu>
-                            </BarDropdown>
-                        </BarItem>
-                        <BarItem>
-                            <BarDropdown>
-                                <BarDropdownToggle>Blazored Examples</BarDropdownToggle>
-                                <BarDropdownMenu>
-                                    <BarDropdownItem To="blazoredtypeaheadexample">Blazored Typeahead Example</BarDropdownItem>
-                                </BarDropdownMenu>
-                            </BarDropdown>
-                        </BarItem>
-                    </BarStart>
-                    <BarEnd>
-                        @*<BarItem>
-                    <Button Color="Color.Primary">Sign up</Button>
-                    <Button Color="Color.Secondary">Log in</Button>
-                </BarItem>*@
-                    </BarEnd>
-                </BarMenu>
-            </Bar>
-        </LayoutHeader>
-        <LayoutContent>
-            @Body
-        </LayoutContent>
-        <LayoutFooter>
-            
-            <footer class="page-footer mt-5 font-small">
+<Layout>
+    <LayoutHeader>
+        <Bar Breakpoint="Breakpoint.Desktop"
+             Background="Background.Light"
+             ThemeContrast="ThemeContrast.Light" Casing="CharacterCasing.Upper" >
+            <BarBrand>
+                Movies
+            </BarBrand>
+            <BarToggler />
+            <BarMenu>
+                <BarStart>
+                    <BarItem>
+                        <BarLink To="/">Main</BarLink>
+                    </BarItem>
+                    <BarItem>
+                        <BarLink To="moviesdata">Movies Data</BarLink>
+                    </BarItem>
+                    <BarItem>
+                        <BarDropdown>
+                            <BarDropdownToggle>Radzen Examples</BarDropdownToggle>
+                            <BarDropdownMenu>
+                                <BarDropdownItem To="gridradzenexample">Radzen Grid Example</BarDropdownItem>
+                                <BarDropdownItem To="datalistradzenexample">Radzen DataList Example</BarDropdownItem>
+                                <BarDropdownItem To="comboboxradzenexample">Radzen Combobox Example</BarDropdownItem>
+                            </BarDropdownMenu>
+                        </BarDropdown>
+                    </BarItem>
+                    <BarItem>
+                        <BarDropdown>
+                            <BarDropdownToggle>Blazorise Examples</BarDropdownToggle>
+                            <BarDropdownMenu>
+                                <BarDropdownItem To="gridblazoriseexample">Blazorise Grid Example and BlazorAnimated</BarDropdownItem>
+                            </BarDropdownMenu>
+                        </BarDropdown>
+                    </BarItem>
+                    <BarItem>
+                        <BarDropdown>
+                            <BarDropdownToggle>Blazored Examples</BarDropdownToggle>
+                            <BarDropdownMenu>
+                                <BarDropdownItem To="blazoredtypeaheadexample">Blazored Typeahead Example</BarDropdownItem>
+                            </BarDropdownMenu>
+                        </BarDropdown>
+                    </BarItem>
+                </BarStart>
+                <BarEnd>
+                    @*<BarItem>
+                            <Button Color="Color.Primary">Sign up</Button>
+                            <Button Color="Color.Secondary">Log in</Button>
+                        </BarItem>*@
+                </BarEnd>
+            </BarMenu>
+        </Bar>
+    </LayoutHeader>
+    <LayoutContent>
+        @Body
+    </LayoutContent>
 
-            
-                <div class="container">
-
-            
-                    <ul class="list-unstyled list-inline text-center">
+    <footer>
+        <div class="container mt-4 pt-3">
+            <div class="row">
+                <div class="col-12 col-md-6 col-xl-3">
+                    <h6>Social</h6>
+                    <ul>
                         <li class="list-inline-item">
                             <a href="https://twitter.com/GafasDePasta/" target="_blank"><img class="thumbnail img-responsive" src="/Icons/iconfinder_twitter_circle_gray_107135_32.png"></a>
                         </li>
-                        @*<li class="list-inline-item">
+                        <li class="list-inline-item">
                             <a href="https://www.linkedin.com/in/santiago-sanchez-garcia-8bb64838" target="_blank"><img class="thumbnail img-responsive" src="/Icons/iconfinder_linkedin_circle_gray_107149_32.png"></a>
-                        </li>*@
-                        @*<li class="list-inline-item">
-                        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=F6UlO2wLB0u0GbFfHzLkmIDx20Qhk-FPtXLZKiAdbv9URUFOMDNYUkFBU1BPMjhSOVBDQVlWNTJPMyQlQCN0PWcu" target="_blank"><img class="thumbnail img-responsive" src="/Icons/iconfinder_Review_Rating_Feedback_4075936.png"></a>
-                    </li>*@
+                        </li>
                     </ul>
-                    
-                </div>
-                <div class="footer-copyright text-center">
-                    © 2021 Copyright: <a href=""> Movies</a> (beta)
-                </div>
-                
+                </div> <!-- end column -->
+                <div class="col-12 col-md-6 col-xl-3">
+                    <h6>About us</h6>
+                    <img src="/Icons/clapperboard.png" alt="logo">
+                    <p>&copy; 2021 &bull; all rights reserved.</p>
+                </div> <!-- end column -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </footer>
 
-            </footer>
-            <!-- Footer -->
-        </LayoutFooter>
-    </Layout>
-
-
-
-
-
-
-
-@*<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="/">Movies</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="/">Home</NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="moviesdata">Movies Data</NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="gridradzenexample">Radzen Grid Example</NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="datalistradzenexample">Radzen DataList Example</NavLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>*@
-
-
-
-<!-- Footer -->
-@*<footer class="py-5 bg-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <p class="m-0 text-white">Copyright &copy; Wired Brain</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="m-0 text-white">Contact Info:</p>
-                    <p class="m-0 text-white">Phone: 555-555-1234 <br />Address: 1234 Test <br />Email: Care@WiredBrain.com</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="m-0 text-white">Coffee Fact of the Day</p>
-                    <p class="m-0 text-white">More cups of coffee are drank every day than there are people on earth. <i>(May not be true)</i></p>
-                </div>
-            </div>
-        </div>
-    </footer>*@
+</Layout>

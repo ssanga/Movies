@@ -8,6 +8,6 @@
 .page-background-class {
     height: 100%;
     width: 100%;
-    background-color: rgb(2, 211, 248);
-    clip-path: polygon(100% 1%, 100% 49%, 49% 99%, 0 99%, 0 0);
+    /*background-color: rgb(2, 211, 248);
+    clip-path: polygon(100% 1%, 100% 49%, 49% 99%, 0 99%, 0 0);*/
 }
