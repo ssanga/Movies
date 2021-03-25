@@ -67,6 +67,7 @@
     protected override async Task OnInitializedAsync()
     {
         movies = await _moviesDataService.GetAll();
+        movies = movies.OrderByDescending(n => n.Id).ToList();
     }
 
     public async void ShowModalNewMovie()

@@ -27,24 +27,46 @@ else
             </div>
         </div>*@
 
-    <div style="margin-right:2%; margin-bottom:10px; text-align:center">
-        <a href="@($"moviedetailsview/{Movie.Id}")">
-            <img src="@Movie.PortraitUrl" alt="@Movie.Name" style="width:225px; height:300px" />
-            <h5 class="pt-1">@Movie.Name</h5>
-            <p>@Movie.Year</p>
-        </a>
-        @if (IsButtonActionsVisible)
-        {
-            <div class="pb-3">
-                <button @onclick="UpdateMovieLocal" href="#" class="btn btn-outline-primary" >
-                    <i class="fas fa-edit" title="Edit Movie"></i>
-                </button>
-                <button @onclick="RemoveMovieLocal" href="#" class="btn btn-outline-danger">
-                    <i class="fas fa-minus-square"  title="Remove Movie"></i>
-                </button>
-            </div>
-        }
+    @*<div style="margin-right:2%; margin-bottom:10px; text-align:center">
+            <a href="@($"moviedetailsview/{Movie.Id}")">
+                <img src="@Movie.PortraitUrl" alt="@Movie.Name" style="width:225px; height:300px" />
+                <h5 class="pt-1">@Movie.Name</h5>
+                <p>@Movie.Year</p>
+            </a>
+            @if (IsButtonActionsVisible)
+            {
+                <div class="pb-3">
+                    <button @onclick="UpdateMovieLocal" href="#" class="btn btn-outline-primary" >
+                        <i class="fas fa-edit" title="Edit Movie"></i>
+                    </button>
+                    <button @onclick="RemoveMovieLocal" href="#" class="btn btn-outline-danger">
+                        <i class="fas fa-minus-square"  title="Remove Movie"></i>
+                    </button>
+                </div>
+            }
+        </div>*@
+
+<div class="card movie_card">
+    <img src="@Movie.PortraitUrl" class="card-img-top" alt="...">
+    <div class="card-body">
+        <i class="fas fa-play play_button" data-toggle="tooltip" data-placement="bottom" title="Play Trailer">
+        </i>
+        <h5 class="card-title">@Movie.Name</h5>
+        <span class="movie_info">@Movie.Year</span>
+        <span class="movie_info float-right"><i class="fas fa-star"></i> 9 / 10</span>
     </div>
+    @if (IsButtonActionsVisible)
+    {
+        <div class="pb-3">
+            <button @onclick="UpdateMovieLocal" href="#" class="btn btn-outline-primary">
+                <i class="fas fa-edit" title="Edit Movie"></i>
+            </button>
+            <button @onclick="RemoveMovieLocal" href="#" class="btn btn-outline-danger">
+                <i class="fas fa-minus-square" title="Remove Movie"></i>
+            </button>
+        </div>
+    }
+</div>
 
 }
 
