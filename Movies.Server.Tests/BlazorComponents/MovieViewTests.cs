@@ -62,6 +62,7 @@ namespace Movies.Server.Tests.BlazorComponents
         }
 
         [TestMethod]
+        [Ignore]
         public void MovieView_Renders_IsButtonActionsVisible_False()
         {
             MoviesDto movie = new MoviesDto
