@@ -57,14 +57,10 @@ else
     </div>
     @if (IsButtonActionsVisible)
     {
-        <div class="pb-3">
-            <button @onclick="UpdateMovieLocal" href="#" class="btn btn-outline-primary">
-                <i class="fas fa-edit" title="Edit Movie"></i>
-            </button>
-            <button @onclick="RemoveMovieLocal" href="#" class="btn btn-outline-danger">
-                <i class="fas fa-minus-square" title="Remove Movie"></i>
-            </button>
-        </div>
+<div class="pb-3 ml-3">
+    <button @onclick="UpdateMovieLocal" data-toggle="tooltip" data-placement="bottom" title="Edit movie" class="edit-btn"><i class="fas fa-pencil-alt"></i></button>
+    <button @onclick="RemoveMovieLocal" data-toggle="tooltip" data-placement="bottom" title="Delete movie" class="delete-btn"><i class="fa fa-trash"></i></button>
+</div>
     }
 </div>
 

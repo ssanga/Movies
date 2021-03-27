@@ -64,3 +64,35 @@
     .credits .card-body i {
         color: #8e24aa;
     }
+
+
+/* Style buttons */
+.delete-btn {
+    background-color: lightcoral; 
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-radius: 15%;
+}
+
+    /* Darker background on mouse-over */
+    .delete-btn:hover {
+        background-color: red;
+    }
+
+.edit-btn {
+    background-color: DodgerBlue; /* Blue background */
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-radius: 15%;
+}
+
+    /* Darker background on mouse-over */
+    .edit-btn:hover {
+        background-color: RoyalBlue;
+    }

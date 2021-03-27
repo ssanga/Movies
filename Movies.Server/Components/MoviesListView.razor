@@ -8,8 +8,6 @@
 
     <h1>Movies</h1>
 
-    <p>This component demonstrates fetching data from Movies Data Service.</p>
-
     @if (movies == null)
     {
         <img src="https://motiongraphicsphoebe.files.wordpress.com/2018/10/8ee212dac057d412972e0c8cc164deee.gif?w=545&h=409" />
@@ -139,7 +137,7 @@
 
         var parameters = new ModalParameters();
 
-        parameters.Add("Title", "Delete Movie");
+        //parameters.Add("Title", "Delete Movie");
         parameters.Add("Message", $"Do you want delete {movie.Name}?");
 
         var formModal = Modal.Show<MsgBoxBlazor>("Delete Movie", parameters);
