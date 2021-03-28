@@ -43,12 +43,26 @@
                             </BarDropdownMenu>
                         </BarDropdown>
                     </BarItem>
+                    <BarItem>
+                        <BarDropdown>
+                            <BarDropdownToggle>API</BarDropdownToggle>
+                            <BarDropdownMenu>
+                                <BarDropdownItem To="https://movies-rest-api.azurewebsites.net">Movies Rest API</BarDropdownItem>
+                                @*<NavLink href="https://movies-rest-api.azurewebsites.net" target="_blank">Movies Rest API</NavLink>*@
+                            </BarDropdownMenu>
+                        </BarDropdown>
+                    </BarItem>
                 </BarStart>
                 <BarEnd>
                     @*<BarItem>
-                            <Button Color="Color.Primary">Sign up</Button>
-                            <Button Color="Color.Secondary">Log in</Button>
-                        </BarItem>*@
+                <Button Color="Color.Primary">Sign up</Button>
+                <Button Color="Color.Secondary">Log in</Button>
+                </BarItem>*@
+                    <div class="social-part">
+                        <a href="https://github.com/ssanga/Movies" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/GafasDePasta/" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/santiago-sanchez-garcia-8bb64838" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    </div>
                 </BarEnd>
             </BarMenu>
         </Bar>
@@ -57,8 +71,8 @@
         @Body
     </LayoutContent>
 
-    <footer>
-        <div class="container mt-4 pt-3">
+    <!--<footer>-->
+        @*<div class="container mt-4 pt-3">
             <div class="row">
                 <div class="col-12 col-md-6 col-xl-3">
                     <h6>Social</h6>
@@ -70,14 +84,14 @@
                             <a href="https://www.linkedin.com/in/santiago-sanchez-garcia-8bb64838" target="_blank"><img class="thumbnail img-responsive" src="/Icons/iconfinder_linkedin_circle_gray_107149_32.png"></a>
                         </li>
                     </ul>
-                </div> <!-- end column -->
+                </div>
                 <div class="col-12 col-md-6 col-xl-3">
                     <h6>About us</h6>
                     <img src="/Icons/clapperboard.png" alt="logo">
                     <p>&copy; 2021 &bull; all rights reserved.</p>
-                </div> <!-- end column -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer>
+                </div> 
+            </div>
+        </div>*@
+    <!--</footer>-->
 
 </Layout>

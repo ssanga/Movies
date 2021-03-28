@@ -75,3 +75,22 @@ footer {
         padding-right: 1.5rem !important;
     }
 }
+
+.social-part .fa {
+    padding-right: 20px;
+    color: #777
+}
+
+
+
+.social-part .fa-twitter:hover {
+    color: #00ABE3;
+}
+
+.social-part .fa-github:hover {
+    color: #AD5C51;
+}
+
+.social-part .fa-linkedin:hover {
+    color: #0094BC;
+}
