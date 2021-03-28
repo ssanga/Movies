@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    <h1>Movies</h1>
+    @*<h1>Movies</h1>*@
 
     @if (movies == null)
     {
@@ -16,12 +16,14 @@
     else
     {
 
-        <div class="row pb-5">
-            <button @onclick="ShowModalNewMovie" href="#" class="btn btn-outline-primary">
-                <i class="fas fa-plus-square"></i>
-                Add New Movie
-            </button>
-            
+        <div class="row pb-5 mt-3">
+            @*<button @onclick="ShowModalNewMovie" href="#" class="btn btn-outline-primary">
+                    <i class="fas fa-plus-square"></i>
+                    Add New Movie
+                </button>*@
+
+            <button class="button ml-3" @onclick="ShowModalNewMovie" href="#" style="vertical-align:middle"><span>Add New Movie </span></button>
+
             <div class="pl-5 mt-2">
                 <Switch TValue="bool" @bind-Checked="movieActionButtons">Show Action Controls</Switch>
             </div>
